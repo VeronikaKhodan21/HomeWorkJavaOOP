@@ -1,10 +1,14 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import Human.Gender;
 import Human.Human;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
     private long countPeople;
     private final List<Human> humanList;
     public FamilyTree(List<Human> humanList){
@@ -84,5 +88,21 @@ public class FamilyTree {
             sb.append("\n");
         }
         return sb.toString();
+    }
+    public void  transientToTree(){
+        ObjectOutputStream objectOutputStream;
+        try {
+            objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream("person.out"));
+                for (Human human : humanList) {
+                     objectOutputStream.writeObject(human);   
+                }
+                    objectOutputStream.close();
+                   
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Externals.out"));
     }
 }
