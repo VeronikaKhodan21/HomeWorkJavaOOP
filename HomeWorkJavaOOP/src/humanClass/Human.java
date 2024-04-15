@@ -97,9 +97,9 @@ public class Human  implements Serializable, Comparable<Human>{
         sb.append(", имя: ");
         sb.append(name);
         sb.append(", пол: ");
-        sb.append(id);
+        sb.append(getGender());
         sb.append(", возраст: ");
-        sb.append(id);
+        sb.append(getAge());
         sb.append(", "); // Мать
         sb.append(getMotherInfo());
         sb.append(", "); //Отец
@@ -163,7 +163,7 @@ public class Human  implements Serializable, Comparable<Human>{
     public int hashCode() {
         return hashCode();
     }
-    @Override
+    //@Override
     public int compareTo(Human o) {
         return birtDate.compareTo(o.getBirtDate());
     }

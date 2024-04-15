@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import humanClass.Human;
 import iteratorFamilyTree.FamilyTreeIterator;
+import sortFamily.ByBirshDateSort;
+import sortFamily.ByGengerSort;
+import sortFamily.ByNameSort;
 
 public class FamilyTree implements Serializable, Iterable<Human>{
     private long countPeople;
@@ -94,5 +97,14 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     @Override
     public Iterator<Human> iterator() {
         return new FamilyTreeIterator(humanList);
+    }
+    public void sortByBirthDate(){
+        humanList.sort(new ByBirshDateSort());
+    }
+    public void sortByGenger(){
+        humanList.sort(new ByGengerSort());
+    }
+    public void sortByName(){
+        humanList.sort(new ByNameSort());
     }
 }
