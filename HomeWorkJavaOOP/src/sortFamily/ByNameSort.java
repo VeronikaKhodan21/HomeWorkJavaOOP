@@ -1,11 +1,9 @@
 package sortFamily;
-
 import java.util.Comparator;
-
-import humanClass.Human;
 //import livingBeing.LivingBeingInterf;
-public class ByNameSort implements Comparator<Human>{
+import livingBegin.LivingBeingInterf;
+public class ByNameSort<E extends LivingBeingInterf> implements Comparator<E>{
     @Override 
-    public int compare(Human o1,Human o2){return o1.getName().compareTo(o2.getName());}
+    public int compare(E o1,E o2){return o1.getName().compareTo(o2.getName());}
 }
 

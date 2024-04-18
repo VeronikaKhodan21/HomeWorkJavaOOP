@@ -1,10 +1,8 @@
 package sortFamily;
-
 import java.util.Comparator;
+import livingBegin.LivingBeingInterf;
 
-import humanClass.Human;
-
-public class ByBirshDateSort implements Comparator<Human> {
+public class ByBirshDateSort<E extends LivingBeingInterf> implements Comparator<E> {
     @Override 
-    public int compare(Human o1, Human o2){return o1.getBirtDate().compareTo(o2.getBirtDate());}
+    public int compare(E o1, E o2){return o1.getBirtDate().compareTo(o2.getBirtDate());}
 }

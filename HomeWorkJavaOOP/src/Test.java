@@ -6,8 +6,8 @@ import humanClass.Human;
 import writer.TreeFamilyInFile;
 
 public class Test {
-    public static FamilyTree TestTreeGo(){
-        FamilyTree tree = new FamilyTree();
+    public static FamilyTree<Human> TestTreeGo(){
+        FamilyTree<Human> tree = new FamilyTree();
         Human vana = new Human("Ваня", Gender.Male, LocalDate.of(1991, 3, 22));
         Human vika = new Human("Вика", Gender.Female, LocalDate.of(2001, 5, 22));
         tree.add(vana);
@@ -26,7 +26,7 @@ public class Test {
     }
     public static void main(String[] args) {
         String pl = "C:\\Users\\roman.khodan\\Desktop\\GeekBrains2023_2024Huka\\JAVA\\HmWroop\\HomeWorkJavaOOP\\TreeBook.txt";
-        FamilyTree tree = TestTreeGo();
+        FamilyTree<Human> tree = TestTreeGo();
         System.out.println(tree);
         tree.sortByGenger();
         System.out.println(tree);

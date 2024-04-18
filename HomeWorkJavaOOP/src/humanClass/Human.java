@@ -5,7 +5,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human  implements Serializable, Comparable<Human>{
+import livingBegin.LivingBeingInterf;
+
+public class Human  implements LivingBeingInterf<Human>, Comparable<Human>{
     private long id;
     private String name;
      private Gender gender;
