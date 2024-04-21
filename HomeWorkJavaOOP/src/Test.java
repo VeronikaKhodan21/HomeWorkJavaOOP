@@ -1,9 +1,10 @@
 import java.time.LocalDate;
 
-import familyTree.FamilyTree;
-import humanClass.Gender;
-import humanClass.Human;
-import writer.TreeFamilyInFile;
+import model.familyTree.FamilyTree;
+import model.humanClass.Gender;
+import model.humanClass.Human;
+import model.writer.TreeFamilyInFile;
+import view.*;
 
 public class Test {
     public static FamilyTree<Human> TestTreeGo(){
@@ -25,13 +26,15 @@ public class Test {
         return tree;
     }
     public static void main(String[] args) {
-        String pl = "C:\\Users\\roman.khodan\\Desktop\\GeekBrains2023_2024Huka\\JAVA\\HmWroop\\HomeWorkJavaOOP\\TreeBook.txt";
-        FamilyTree<Human> tree = TestTreeGo();
-        System.out.println(tree);
-        tree.sortByGenger();
-        System.out.println(tree);
+        // String pl = "C:\\Users\\roman.khodan\\Desktop\\GeekBrains2023_2024Huka\\JAVA\\HmWroop\\HomeWorkJavaOOP\\TreeBook.txt";
+        // FamilyTree<Human> tree = TestTreeGo();
+        // System.out.println(tree);
+        // tree.sortByGenger();
+        // System.out.println(tree);
         //TreeFamilyInFile.serializableToTree(tree, pl); //Семью в файл
         //FamilyTree tree1 = TreeFamilyInFile.deSerializableToTree(pl); //Семью из файло
         //System.out.println(tree1);
+        View view = new ConsoleUI();
+        view.start();
     }
 }

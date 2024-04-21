@@ -1,11 +1,11 @@
-package livingBegin;
+package model.livingBegin;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 
-import humanClass.Gender;
+import model.humanClass.Gender;
 
 
 public interface LivingBeingInterf<T> extends Serializable {

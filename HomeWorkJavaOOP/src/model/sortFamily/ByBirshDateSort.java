@@ -1,6 +1,7 @@
-package sortFamily;
+package model.sortFamily;
 import java.util.Comparator;
-import livingBegin.LivingBeingInterf;
+
+import model.livingBegin.LivingBeingInterf;
 
 public class ByBirshDateSort<E extends LivingBeingInterf> implements Comparator<E> {
     @Override 
