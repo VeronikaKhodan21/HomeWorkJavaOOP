@@ -75,7 +75,7 @@ public class ConsoleUI implements View {
         presenter.sortByAge();
     }
     private LocalDate setDeatDateBecas(){
-        System.out.println("Вам известна дата смерти? \"да\" or \"нет\": ");
+        System.out.println("Вам известна дата смерти? \"да\" или \"нет\": ");
         if (scanner.nextLine().equalsIgnoreCase("да")) {
             return  setDateOfDead();
         } else {
@@ -83,7 +83,6 @@ public class ConsoleUI implements View {
         }
     }
     public void addNewSubjectToFamilyTree() {
-        setClassForFamilyTree();
         String name = setNameForNewSubject();
         LocalDate birthDate = setDateOfBirth();
         LocalDate deadDate = setDeatDateBecas();
@@ -103,7 +102,7 @@ public class ConsoleUI implements View {
     private LocalDate setDateOfDead() {
         System.out.println("Введите дату смерти: ");
         System.out.print("год смерти: ");
-        int deadYear = Integer.parseInt(scanner.nextLine());// Method for searching the correctness of the entered data
+        int deadYear = Integer.parseInt(scanner.nextLine());
         System.out.print("месяц смерти: ");
         int deadMonth = Integer.parseInt(scanner.nextLine());
         System.out.print("день смерти :");
@@ -115,7 +114,7 @@ public class ConsoleUI implements View {
     private LocalDate setDateOfBirth() {
         System.out.println("Дата рождения ");
         System.out.print("Год рождения: ");
-        int year = Integer.parseInt(scanner.nextLine());// Method for searching the correctness of the entered data
+        int year = Integer.parseInt(scanner.nextLine());
         System.out.print("Месяц рождения: ");
         int month = Integer.parseInt(scanner.nextLine());
         System.out.print("День рождения: ");
@@ -130,14 +129,14 @@ public class ConsoleUI implements View {
         return name;
     }
 
-    private void setClassForFamilyTree() {
-        System.out.println("Введите тип обЬекта(человек или другое(других нету :-( ))): ");
-        String type = scanner.nextLine();
-        if (type.equalsIgnoreCase("Человек")) {
-            Class clazz = Human.class;
-        }
-        Class clazz = Human.class;
-    }
+    // private void setClassForFamilyTree() {
+    //     System.out.println("Введите тип обЬекта(человек или другое(других нету :-( ))): ");
+    //     String type = scanner.nextLine();
+    //     if (type.equalsIgnoreCase("Человек")) {
+    //         Class clazz = Human.class;
+    //     }
+    //     Class clazz = Human.class;
+    // }
 
     public void finish() {
         System.out.println("Пока ");

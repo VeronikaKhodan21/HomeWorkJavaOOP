@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.familyTree.FamilyTree;
 import model.humanClass.Gender;
+import model.humanClass.Human;
 import model.livingBegin.LivingBeingInterf;
 import model.service.Service;
 import view.View;
@@ -17,25 +18,25 @@ public class Presenter<E extends LivingBeingInterf> {
     
     public Presenter(View view) {
         this.view = view;
-        service = new Service<>();
+        service = new Service();
     }
     public void addToFamilyTree(String name, LocalDate dob, LocalDate dod, Gender gender) {
         service.addToFamilyTree(name, gender,dob, dod );
     }
     public void getFamilyTree() {
-        List<E> res = service.getFamilyTreeList();
-        for (E e : res) {
+        List<Human> res = service.getFamilyTreeList();
+        for (Human e : res) {
             view.getAnswer("\n"+e.toString());
         }
         
     }
-    private void printFamilyTree(List<E> familyTree){
-        for (E e : familyTree) {
+    private void printFamilyTree(List<Human> familyTree){
+        for (Human e : familyTree) {
             view.getAnswer("\n"+e.toString());
         }
     }
     public void sortByName() {
-        List<E> res = service.sortByName();
+        List<Human> res = service.sortByName();
         this.printFamilyTree(res);
     }
     public void writeTreeFamily(String fileName) {
@@ -48,26 +49,26 @@ public class Presenter<E extends LivingBeingInterf> {
     }
     public void readTreeFamily(String fileName) {
         
-        FamilyTree tree = service.treeInputFile(fileName); 
+        FamilyTree<Human> tree = service.treeInputFile(fileName); 
         if (tree != null) {
-            Service anotherService = new Service<>(tree);
-            for (Object name : anotherService.getListOfName()) {
-                view.getAnswer((String) name);
+            
+            for (Human human : tree) {
+                view.getAnswer("\n"+human.toString());
             }
         } else {
             view.getAnswer("Не удалось установить семью...");
         }
     }
     public void sortByDateBirth() {
-        List<E> res =service.sortByBirthDate();
+        List<Human> res =service.sortByBirthDate();
         this.printFamilyTree(res);
     }
     public void sortByGenger() {
-        List<E> res =service.sortByGenger();
+        List<Human> res =service.sortByGenger();
         this.printFamilyTree(res);
     }
     public void sortByAge() {
-        List<E> res = service.sortByBirthDate();
+        List<Human> res = service.sortByBirthDate();
         this.printFamilyTree(res);
     }
 }

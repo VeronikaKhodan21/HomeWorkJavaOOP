@@ -1,26 +1,17 @@
 package model.service;
 import java.time.LocalDate;
-import java.util.ArrayList;
-//import java.util.logging.FileHandler;
 import java.util.List;
 
 import model.familyTree.FamilyTree;
 import model.humanClass.Gender;
 import model.humanClass.Human;
-import model.livingBegin.LivingBeingInterf;
-import model.writer.TreeFamilyInFile;
+import model.writer.FileHandler;
 
-public class Service<E extends LivingBeingInterf<E>> {
+public class Service{
     private long genId;
-    private FamilyTree<E> livingList;
-    Class clazz;
-    //private FileHandler fh;
-    public Service(FamilyTree<E> livingList) {
+    private FamilyTree<Human> livingList;
+    public Service(FamilyTree<Human> livingList) {
         this.livingList = livingList;
-    }
-    public Service(Class clazz) {
-        this.livingList = new FamilyTree<>();
-        this.clazz = clazz;
     }
     public Service() {
         this.livingList = new FamilyTree<>();
@@ -28,69 +19,91 @@ public class Service<E extends LivingBeingInterf<E>> {
     public boolean addToFamilyTree(String name, LocalDate birtDate, Gender gender) {
         Human human = new Human(name ,gender, birtDate);
         human.setId(genId++);
-        livingList.add((E) human);
+        livingList.add(human);
         return true;
     }
 
 
-    public boolean addToFamilyTree(String name,LocalDate birtDate, Gender gender, E father, E mother) {
+    public boolean addToFamilyTree(String name,LocalDate birtDate, Gender gender, Human father, Human mother) {
         Human human = new Human(name,gender,  birtDate,  (Human) father, (Human) mother);
         human.setId(genId++);
-        livingList.add((E) human);
+        livingList.add(human);
         return true;
     }
 
     public boolean addToFamilyTree(String name,Gender gender, LocalDate birtDate , LocalDate deatDate ) {
         Human human = new Human(name,  gender,birtDate , deatDate );
         human.setId(genId++);
-        livingList.add((E) human);
+        livingList.add(human);
         return true;
     }
-    public void setParentsForSubject(String nameForSearching, E parent) {
+    public void setParentsForSubject(String nameForSearching, Human parent) {
         if (findByName(nameForSearching) != null) {
             findByName(nameForSearching).addParent(parent);
         }
     }
-    public E findByName(String name) {
-        E  livingBeing = livingList.getByName(name);
+    public Human findByName(String name) {
+        Human  livingBeing = livingList.getByName(name);
         if (livingBeing != null) return livingBeing;
-        //System.out.println("Subject with name: " + name + " is not found");
         return null;
     }
-    public List<E> sortByGenger() {
+    public List<Human> sortByGenger() {
         return livingList.sortByGenger();
     }
-    public List<E> sortAge() {
+    public List<Human> sortAge() {
         return livingList.sortByAge();
     }
-    public List<E> sortByBirthDate() {
+    public List<Human> sortByBirthDate() {
         return livingList.sortByBirthDate();
     }
 
-    public List<E> sortByName() {
-        List<E> a =  livingList.sortByName();
+    public List<Human> sortByName() {
+        List<Human> a =  livingList.sortByName();
         return a;
     }
     public boolean treeInFile(String nameFile){
         if(nameFile != null){
-            TreeFamilyInFile.serializableToTree(livingList, nameFile);
-        return true;
+            serializableToTree(livingList, nameFile);
+            return true;
         }else{
             return false;
-        }
-        
+        }  
     }
-    public List<E> getFamilyTreeList() {
+    private  boolean serializableToTree(FamilyTree<Human> tr, String fileName){
+        try {
+            FileHandler fh = new FileHandler();
+            fh.save(tr, fileName);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public List<Human> getFamilyTreeList() {
         return livingList.getFamilyTreeList();
     }
-    public FamilyTree<E> getFamilyTree() {
+    public FamilyTree<Human> getFamilyTree() {
         return livingList;
     }
-    public FamilyTree<E> treeInputFile(String filrName){
-        return TreeFamilyInFile.deSerializableToTree(filrName); 
-        
+    public FamilyTree<Human> treeInputFile(String filrName){
+        if(deSerializableToTree(filrName) != null){
+           this.livingList = deSerializableToTree(filrName);
+        return deSerializableToTree(filrName) ;   
+        }else{
+            return null;
+        }
     }
-    public List<String> getListOfName(List<E> inputList) {
+    private FamilyTree<Human> deSerializableToTree(String fileName) {
+        try {
+            FileHandler fh = new FileHandler();
+            FamilyTree<Human> tree = (FamilyTree<Human>)fh.read(fileName);
+            return tree;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public List<String> getListOfName(List<Human> inputList) {
         return livingList.getListOfName(inputList);
     }
     public List<String> getListOfName() {
